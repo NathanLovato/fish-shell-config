@@ -1,6 +1,3 @@
-# Using vi mode
-fish_vi_key_bindings
-
 set ALTERNATE_EDITOR ""
 set EDITOR "emacsclient -c"
 set VISUAL "emacsclient -c -a emacs"
@@ -10,11 +7,12 @@ if not set -q abbrs_initialized
     set -U abbrs_initialized
     echo -n Setting abbreviations...
 
-    abbr g 'git'
+    # GIT
     abbr ga 'git add'
     abbr gb 'git branch'
     abbr gbl 'git blame'
     abbr gc 'git commit -m'
+    abbr gcl 'git clone'
     abbr gco 'git checkout'
     abbr gcp 'git cherry-pick'
     abbr gd 'git diff'
@@ -27,22 +25,20 @@ if not set -q abbrs_initialized
     abbr gs 'git status'
     abbr gst 'git stash'
 
-    abbr e 'emacs .'
+    abbr hb 'hub browse'
+    abbr hbi 'hub browse -- issues'
+    abbr hc 'hub checkout'
+    abbr hi 'hub issue'
+    abbr hic 'hub issue create -m'
 
     abbr p2 'python2'
     abbr p3 'python3'
     abbr p 'python3'
 
-    abbr f 'firefox '
-    abbr fs 'firefox --search'
-    abbr fsy 'firefox https://www.youtube.com/results\?search_query='
-
-    abbr br 'bpsrender -w 6 '
-    abbr bp 'bpsproxy .'
-
+    # APT
     abbr ai 'sudo apt install'
-    abbr au 'sudo apt update'
     abbr aug 'sudo apt upgrade'
+    abbr aud 'sudo apt update'
     abbr ar 'sudo apt remove'
     abbr aar 'sudo apt autoremove'
     abbr as 'apt search'
@@ -53,10 +49,34 @@ if not set -q abbrs_initialized
     abbr hs 'hugo server -D'
     abbr h 'hugo'
 
+
+    # APPLICATIONS
     abbr n 'nautilus .'
+    abbr e 'emacs .'
+    abbr r 'ranger --choosedir="/home/gdquest/.config/ranger/.rangerdir"; cd (cat /home/gdquest/.config/ranger/.rangerdir)'
+
+    abbr pq 'pngquant'
 
     abbr yt 'youtube-dl'
+    abbr yta 'youtube-dl -x'
     abbr ytt 'youtube-dl --list-thumbnail'
+
+    abbr f 'firefox'
+    abbr fs 'firefox --search'
+    abbr fsy 'firefox https://www.youtube.com/results\?search_query='
+
+    abbr br 'bpsrender -w 6'
+    abbr brs 'bpsrender -w 6 -d *.blend && bpsrender *.blend -j'
+    abbr brm 'bpsrender -m *.blend'
+    abbr bp 'bpsproxy .'
+    abbr bpnv 'bpsproxy . -p nvenc'
+
+    # SEARCH
+    abbr fi 'find . -iname'
+    abbr g 'grep'
+    abbr l 'locate'
+    abbr lsd 'find * -maxdepth 0 -type d'
+    abbr fsd 'find * -maxdepth 0 -type d'
 
     echo 'Done'
 end
