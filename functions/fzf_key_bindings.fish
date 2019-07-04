@@ -1,0 +1,1 @@
+/home/gdquest/.fzf/shell/key-bindings.fish
