@@ -1,17 +1,9 @@
 function video_create_blender_projects --description ''
     set ERROR_MISSING_FOLDERS "You need to pass folder(s) to this function for it to work"
-    if not [ $argv ]
-      echo $ERROR_MISSING_FOLDERS
-    end
-    set folders_list
-    for i in $argv
-        if test -d $i
-            set folders_list $folders_list $i
-        end
-    end
-    if not test $folders_list or not [ $argv ]
+
+    set folders_list (filter_folders $argv)
+    if [ $folders_list ]
         echo $ERROR_MISSING_FOLDERS
-        echo "Missing arguments or invalid arguments:" $argv
         return
     end
 
