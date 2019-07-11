@@ -1,17 +1,25 @@
-function accounting_file_expense --description 'Move a file to today in the accounting folder'
+function accounting_file_expense --description "Move a file to the right expense folder and dates the file"
     set expenses_folder "/home/gdquest/Dropbox/Files/2019/company/2.expenses"
-    set date (date -I)
+    argparse --name=accounting_file_expense --min-args 1 'd/date=' -- $argv
+
+    set extensions (string split " " "pdf jpg jpeg png")
+    set file_list (filter_files $argv --extensions $extensions)
+    if [ $file_list ]
+        echo $ERROR_MISSING_FOLDERS
+        return
+    end
+
+
+    set date (date -d $_flag_date -I)
+    if not [ $date ]
+        set date (date -I)
+    end
     set month (echo $date | cut -d "-" -f 2)
+
     set target_folder {$expenses_folder}/{$month}
     if not test -d $target_folder
         mkdir $target_folder
     end
-    if not [ $argv ]
-        echo 'No files passed to the function, nothing to do'
-        return
-    end
-
-    set extensions (string split " " "pdf jpg jpeg png") 
     for f in $argv
         set name (basename $f)
         set extension (string split "." --right $name)[-1]
