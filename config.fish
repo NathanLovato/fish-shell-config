@@ -78,5 +78,10 @@ if not set -q abbrs_initialized
     abbr lsd 'find * -maxdepth 0 -type d'
     abbr fsd 'find * -maxdepth 0 -type d'
 
+    abbr nwo "nmcli radio wifi off"
+    abbr wo "nmcli radio wifi off"
+
+    abbr gsq "gnome-session-quit"
+
     echo 'Done'
 end
