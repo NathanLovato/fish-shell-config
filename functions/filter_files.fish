@@ -1,5 +1,6 @@
 function filter_files --description "Outputs a list of valid files, optionally filtered with a list of extensions"
     argparse --name=filter_files --min-args 1 'e/extensions=' -- $argv
+    or return
 
     set extensions (string split " " $_flag_extensions)
     set files
