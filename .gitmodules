@@ -1,0 +1,3 @@
+[submodule "conf.d"]
+	path = conf.d
+	url = ./conf.d/

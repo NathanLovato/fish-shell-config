@@ -1,13 +1,9 @@
-set ALTERNATE_EDITOR ""
-set EDITOR "emacsclient -c"
-set VISUAL "emacsclient -c -a emacs"
-
 # Abbreviations
 if not set -q abbrs_initialized
     set -U abbrs_initialized
     echo -n Setting abbreviations...
 
-    # GIT
+    # git
     abbr ga 'git add'
     abbr gb 'git branch'
     abbr gbl 'git blame'
@@ -25,17 +21,23 @@ if not set -q abbrs_initialized
     abbr gs 'git status'
     abbr gst 'git stash'
 
+    # hub
     abbr hb 'hub browse'
     abbr hbi 'hub browse -- issues'
-    abbr hc 'hub checkout'
+    abbr hco 'hub checkout'
     abbr hi 'hub issue'
     abbr hic 'hub issue create -m'
+    abbr hcl 'hub clone'
+    abbr hcr 'hub create'
+    abbr hpr 'hub pull-request'
+    abbr hrl 'hub release'
 
+    # Python
     abbr p2 'python2'
     abbr p3 'python3'
     abbr p 'python3'
 
-    # APT
+    # apt
     abbr ai 'sudo apt install'
     abbr aug 'sudo apt upgrade'
     abbr aud 'sudo apt update'
@@ -44,17 +46,12 @@ if not set -q abbrs_initialized
     abbr as 'apt search'
     abbr asw 'apt show'
 
-    abbr hnp 'hugo new post/2019/'
-    abbr hn 'hugo new'
-    abbr hs 'hugo server -D'
-    abbr h 'hugo'
-
-
-    # APPLICATIONS
+    # gui apps
     abbr n 'nautilus .'
     abbr e 'emacs .'
     abbr r 'ranger --choosedir="/home/gdquest/.config/ranger/.rangerdir"; cd (cat /home/gdquest/.config/ranger/.rangerdir)'
 
+    # cli programs
     abbr pq 'pngquant'
 
     abbr yt 'youtube-dl'
@@ -65,22 +62,32 @@ if not set -q abbrs_initialized
     abbr fs 'firefox --search'
     abbr fsy 'firefox https://www.youtube.com/results\?search_query='
 
+    # hugo
+    abbr hnp 'hugo new post/2019/'
+    abbr hn 'hugo new'
+    abbr hs 'hugo server -D'
+    abbr h 'hugo'
+
+    # power sequencer
     abbr br 'bpsrender -w 6'
     abbr brs 'bpsrender -w 6 -d *.blend && bpsrender *.blend -j'
     abbr brm 'bpsrender -m *.blend'
     abbr bp 'bpsproxy .'
     abbr bpnv 'bpsproxy . -p nvenc'
 
-    # SEARCH
+    # search
     abbr fi 'find . -iname'
     abbr g 'grep'
     abbr l 'locate'
     abbr lsd 'find * -maxdepth 0 -type d'
     abbr fsd 'find * -maxdepth 0 -type d'
 
-    abbr nwo "nmcli radio wifi off"
-    abbr wo "nmcli radio wifi off"
+    # internet
+    abbr nwoff "nmcli networking off"
+    abbr nwx "nmcli networking off"
+    abbr nwon "nmcli radio wifi off"
 
+    # gnome
     abbr gsq "gnome-session-quit"
 
     echo 'Done'
