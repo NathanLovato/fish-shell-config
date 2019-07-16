@@ -1,1 +1,1 @@
-/home/gdquest/.local/share/omf/themes/robbyrussell/fish_prompt.fish
+/home/gdquest/.local/share/omf/themes/bobthefish/fish_prompt.fish
