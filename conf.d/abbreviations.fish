@@ -3,6 +3,19 @@ if not set -q abbrs_initialized
     set -U abbrs_initialized
     echo -n Setting abbreviations...
 
+    # search
+    abbr fi 'find . -iname'
+    abbr g 'grep'
+    abbr l 'locate'
+    abbr lsd 'find * -maxdepth 0 -type d'
+    abbr fsd 'find * -maxdepth 0 -type d'
+
+    # navigation
+    abbr t 'tree -C'
+    abbr ... 'cd ../..'
+    abbr .... 'cd ../../..'
+    abbr ..... 'cd ../../../..'
+
     # git
     abbr ga 'git add'
     abbr gb 'git branch'
@@ -37,6 +50,10 @@ if not set -q abbrs_initialized
     abbr p3 'python3'
     abbr p 'python3'
 
+    abbr pi 'pip install'
+    abbr piu 'pip install --upgrade'
+    abbr piug 'pip install --upgrade'
+
     # apt
     abbr ai 'sudo apt install'
     abbr aug 'sudo apt upgrade'
@@ -49,6 +66,9 @@ if not set -q abbrs_initialized
     # gui apps
     abbr n 'nautilus .'
     abbr e 'emacs .'
+    abbr ec 'emacsclient . -c &'
+
+    # cd to the last visited directory upon exiting ranger
     abbr r 'ranger --choosedir="/home/gdquest/.config/ranger/.rangerdir"; cd (cat /home/gdquest/.config/ranger/.rangerdir)'
 
     # cli programs
@@ -69,18 +89,11 @@ if not set -q abbrs_initialized
     abbr h 'hugo'
 
     # power sequencer
-    abbr br 'bpsrender -w 6'
+    abbr br 'bpsrender -w 6 *.blend && ffmpeg_compress_nvenc --delete *.mp4 && mv *.mp4 ~/Videos/youtube-exports/ && rm bpsrender/'
     abbr brs 'bpsrender -w 6 -d *.blend && bpsrender *.blend -j'
     abbr brm 'bpsrender -m *.blend'
     abbr bp 'bpsproxy .'
     abbr bpnv 'bpsproxy . -p nvenc'
-
-    # search
-    abbr fi 'find . -iname'
-    abbr g 'grep'
-    abbr l 'locate'
-    abbr lsd 'find * -maxdepth 0 -type d'
-    abbr fsd 'find * -maxdepth 0 -type d'
 
     # internet
     abbr nwoff "nmcli networking off"

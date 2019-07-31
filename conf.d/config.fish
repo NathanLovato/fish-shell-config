@@ -1,4 +1,3 @@
-set ALTERNATE_EDITOR ""
-set EDITOR "emacsclient -c"
-set VISUAL "emacsclient -c -a emacs"
-
+set ALTERNATE_EDITOR 'nvim'
+set EDITOR 'emacs'
+set VISUAL 'emacs'
