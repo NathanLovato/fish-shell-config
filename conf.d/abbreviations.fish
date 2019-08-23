@@ -89,7 +89,7 @@ if not set -q abbrs_initialized
     abbr h 'hugo'
 
     # power sequencer
-    abbr br 'bpsrender -w 6 *.blend && ffmpeg_compress_nvenc --delete *.mp4 && mv *.mp4 ~/Videos/youtube-exports/ && rm bpsrender/'
+    abbr br 'bpsrender -w 6 *.blend && ffmpeg_compress_nvenc --delete *.mp4 && mv *.mp4 ~/Videos/youtube-exports/ && rm -rf bpsrender/'
     abbr brs 'bpsrender -w 6 -d *.blend && bpsrender *.blend -j'
     abbr brm 'bpsrender -m *.blend'
     abbr bp 'bpsproxy .'
