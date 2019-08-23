@@ -3,10 +3,10 @@ function accounting_file_expense --description "Move a file to the right expense
     argparse --name=accounting_file_expense --min-args 1 'd/date=' -- $argv
     or return
 
-    set extensions (string split " " "pdf jpg jpeg png")
+    set extensions "pdf jpg jpeg png"
     set file_list (filter_files $argv --extensions $extensions)
     if not [ $file_list ]
-        echo "None of the file paths exists, cancelling"
+        echo "None of the file paths exists, canceling"
         return
     end
 
@@ -21,11 +21,13 @@ function accounting_file_expense --description "Move a file to the right expense
         mkdir $target_folder
     end
 
-    for f in $argv
+    set extensions_list (string split " " $extensions)
+    for f in $file_list
         set name (basename $f)
         set extension (string split "." --right $name)[-1]
 
-        if not contains $extension $extensions
+        if not contains $extension $extensions_list
+            echo The extension of $f, $extension, is not in $extensions_list
             continue
         end
 
