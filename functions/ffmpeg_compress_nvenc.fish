@@ -2,8 +2,7 @@ function ffmpeg_compress_nvenc --description "Compresses video files passed as a
     argparse --name=ffmpeg_compress_nvenc --min-args 1 'd/delete' -- $argv
     or return
 
-    set extensions (string split " " "mp4 mov mkv")
-    set file_list (filter_files $argv --extensions $extensions)
+    set file_list (filter_files --extensions "mp4 mov mkv" -- $argv)
     if not [ $file_list ]
         echo "None of the file paths exists, cancelling"
         return

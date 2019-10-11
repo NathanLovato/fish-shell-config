@@ -14,7 +14,7 @@ function video_create_blender_projects --description 'Create one or more '
     set EXT_AUDIO wav,mp3,aac,flac
 
     set blender_template_file $HOME/Templates/video.blend
-    set blender_python_file ./blender_import_footage.py
+    set blender_python_file $HOME/.config/fish/functions/video_create_blender_projects.py
 
     echo "Creating directories and moving files"
     set start_folder (pwd)
@@ -36,7 +36,10 @@ function video_create_blender_projects --description 'Create one or more '
             mv $file audio/$file
         end
 
-        # blender $blend_file_path -b -P $blender_python_file
-        cd $start_folder
+	if test -f $blender_python_file
+	   blender $blend_file_path -b -P $blender_python_file
+        end
+        
+	cd $start_folder
     end
 end

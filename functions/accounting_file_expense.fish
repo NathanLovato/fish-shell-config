@@ -1,6 +1,6 @@
 function accounting_file_expense --description "Move a file to the right expense folder and dates the file"
-    set expenses_folder "/home/gdquest/Dropbox/Files/2019/company/2.expenses"
-    argparse --name=accounting_file_expense --min-args 1 'd/date=' -- $argv
+    set root_directory "/home/gdquest/Dropbox/Files/2019/company/2.frais"
+    argparse --name=accounting_file_expense --min-args 1 'd/date=' 't/type=' -- $argv
     or return
 
     set extensions "pdf jpg jpeg png"
@@ -16,7 +16,15 @@ function accounting_file_expense --description "Move a file to the right expense
     end
     set month (echo $date | cut -d "-" -f 2)
 
-    set target_folder {$expenses_folder}/{$month}
+    if [ $_flag_type = "shared" ]
+        set directory $root_directory/3.partagés
+    else if [ $_flag_type = "personal" ]
+        set directory $root_directory/2.personnels
+    else
+        set directory $root_directory/1.pros
+    end
+
+    set target_folder {$directory}/{$month}
     if not test -d $target_folder
         mkdir $target_folder
     end
@@ -35,3 +43,5 @@ function accounting_file_expense --description "Move a file to the right expense
         mv $f $path && echo "moved" $f "to" $path
     end
 end
+
+complete -c accounting_file_expense -s t -l type -a "personal shared pro"
