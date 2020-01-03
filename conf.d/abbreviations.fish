@@ -95,6 +95,8 @@ if not set -q abbrs_initialized
     abbr bp 'bpsproxy .'
     abbr bpnv 'bpsproxy . -p nvenc'
 
+    abbr ffmpeg_remap_audio "ffmpeg -i video -i audio -map 0:v:0 -map 1:a:0 -c:v copy -c:a aac -b:a 320k introducing-docs.mp4"
+
     # internet
     abbr nwoff "nmcli networking off"
     abbr nwx "nmcli networking off"
