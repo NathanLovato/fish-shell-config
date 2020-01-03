@@ -1,5 +1,5 @@
-function ffmpeg_compress_nvenc --description "Compresses video files passed as arguments using h264_nvenc"
-    argparse --name=ffmpeg_compress_nvenc --min-args 1 'd/delete' -- $argv
+function ffmpeg_to_mp4_fastdecode --description "Transcodes input files to editing-friendly H264/MP4 files"
+    argparse --name=ffmpeg_to_mp4_fastdecode --min-args 1 'd/delete' -- $argv
     or return
 
     set file_list (filter_files --extensions "mp4 mov mkv flv" -- $argv)
@@ -12,9 +12,11 @@ function ffmpeg_compress_nvenc --description "Compresses video files passed as a
         set directory (dirname $f)
         set file (basename $f)
         set name (string split -m 1 -r '.' $file)[1]
-        ffmpeg -i $f -c:a copy -c:v h264_nvenc -preset slow -qp 20 $directory/$name-compressed.mp4
+        ffmpeg -hide_banner -y -i $f -c:a copy -crf 15 -g 1 -tune fastdecode $directory/$name.edit.mp4
         if [ $_flag_delete ]
             rm $f
         end
     end
 end
+
+complete -c ffmpeg_to_mp4_fastdecode -s d -l delete
