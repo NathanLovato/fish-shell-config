@@ -1,4 +1,4 @@
-function video_create_blender_projects --description 'Create one or more '
+function video_create_blender_projects --description 'Create one or more video editing projects with Blender'
     argparse --name=video_create_blender_projects --min-args 1 'd/date=' -- $argv
     or return
 
@@ -9,7 +9,7 @@ function video_create_blender_projects --description 'Create one or more '
         end
     end
 
-    set EXT_VIDEO mp4,mov,mts,mkv,MP4,MOV,MTS,MKV
+    set EXT_VIDEO mp4,flv,mov,mts,mkv,MP4,FLV,MOV,MTS,MKV
     set EXT_IMG png,jpg,gif
     set EXT_AUDIO wav,mp3,aac,flac
 
@@ -36,10 +36,10 @@ function video_create_blender_projects --description 'Create one or more '
             mv $file audio/$file
         end
 
-	if test -f $blender_python_file
-	   blender $blend_file_path -b -P $blender_python_file
+        if test -f $blender_python_file
+            blender $blend_file_path -b -P $blender_python_file
         end
-        
-	cd $start_folder
+
+        cd $start_folder
     end
 end
