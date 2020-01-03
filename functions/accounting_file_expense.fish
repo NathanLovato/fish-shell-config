@@ -1,5 +1,5 @@
 function accounting_file_expense --description "Move a file to the right expense folder and dates the file"
-    set root_directory "/home/gdquest/Dropbox/Files/2019/company/2.frais"
+    set root_directory "/home/gdquest/Dropbox/Files/"(date +%Y)"/company/2.frais"
     argparse --name=accounting_file_expense --min-args 1 'd/date=' 't/type=' -- $argv
     or return
 
@@ -44,4 +44,5 @@ function accounting_file_expense --description "Move a file to the right expense
     end
 end
 
+complete -c accounting_file_expense -s d -l date
 complete -c accounting_file_expense -s t -l type -a "personal shared pro"
