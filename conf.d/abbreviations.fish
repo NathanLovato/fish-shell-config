@@ -20,17 +20,47 @@ if not set -q abbrs_initialized
     abbr ga 'git add'
     abbr gb 'git branch'
     abbr gbl 'git blame'
-    abbr gc 'git commit -m'
+
+    abbr gc 'git commit'
+    abbr gcm 'git commit -m'
+    abbr gca 'git commit --amend'
+    abbr gcaa 'git commit --amend --author="Name <email>"'
+
     abbr gcl 'git clone'
+
     abbr gco 'git checkout'
+    abbr gcom 'git checkout master'
+
     abbr gcp 'git cherry-pick'
+
     abbr gd 'git diff'
+    abbr gd 'git diff'
+
     abbr gf 'git fetch'
     abbr gl 'git log'
+
     abbr gm 'git merge'
+    abbr grb 'git rebase'
+
     abbr gp 'git push'
+    abbr gpom 'git push origin master'
+    abbr gpum 'git push upstream master'
+
     abbr gpl 'git pull'
-    abbr gr 'git remote'
+    abbr gplr 'git pull --rebase'
+    abbr gplum 'git pull upstream/master'
+    abbr gplumr 'git pull upstream/master --rebase'
+
+    abbr grsu 'git remote set-url'
+    abbr grgu 'git remote get-url'
+    abbr grsuo 'git remote set-url origin'
+    abbr grguo 'git remote get-url origin'
+    abbr grsuu 'git remote set-url upstream'
+    abbr grguu 'git remote get-url upstream'
+
+    abbr grh 'git reset --hard'
+    abbr grhom 'git reset --hard origin/master'
+
     abbr gs 'git status'
     abbr gst 'git stash'
 
