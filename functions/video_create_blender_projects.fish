@@ -1,13 +1,16 @@
 function video_create_blender_projects --description 'Create one or more video editing projects with Blender'
-    argparse --name=video_create_blender_projects --min-args 1 'd/date=' -- $argv
+    argparse --name=video_create_blender_projects --min-args 1 'h/help' -- $argv
     or return
 
-    set ERROR_MISSING_FOLDERS "You need to pass folder(s) to this function for it to work"
-    for dir in $argv
-        if not test -d $dir
-            mkdir $dir
-        end
+    if [ $_flag_help ]
+        echo "Create one or more video editing projects with Blender.
+        Usage:
+        video_create_blender_projects [directory_1] [directory_2] ...
+        For each input directory, moves all the footage files it contains into subdirectories, copies the template blend file to the directory, and renames it."
+        return
     end
+
+    set ERROR_MISSING_FOLDERS "You need to pass folder(s) to this function for it to work."
 
     set EXT_VIDEO mp4,flv,mov,mts,mkv,MP4,FLV,MOV,MTS,MKV
     set EXT_IMG png,jpg,gif
@@ -16,7 +19,14 @@ function video_create_blender_projects --description 'Create one or more video e
     set blender_template_file $HOME/Templates/video.blend
     set blender_python_file $HOME/.config/fish/functions/video_create_blender_projects.py
 
-    echo "Creating directories and moving files"
+    echo "Creating directories and moving files."
+    for dir in $argv
+        if not test -d $dir
+            echo "Directory $dir does not exist, creating it."
+            mkdir $dir
+        end
+    end
+
     set start_folder (pwd)
     for dir in $argv
         cd $dir
