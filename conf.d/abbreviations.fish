@@ -16,6 +16,19 @@ if not set -q abbrs_initialized
     abbr .... 'cd ../../..'
     abbr ..... 'cd ../../../..'
 
+    # clipboard paste
+    abbr cbp "xclip -selection clipboard -o"
+    abbr clipp "xclip -selection clipboard -o"
+    abbr clippaste "xclip -selection clipboard -o"
+    abbr cbg "xclip -selection clipboard -o"
+    abbr clipg "xclip -selection clipboard -o"
+    abbr clipget "xclip -selection clipboard -o"
+
+    # clipboard copy
+    abbr cbc "xclip -selection clipboard"
+    abbr clipc "xclip -selection clipboard"
+    abbr clipcopy "xclip -selection clipboard"
+
     # git
     abbr ga 'git add'
     abbr gb 'git branch'
