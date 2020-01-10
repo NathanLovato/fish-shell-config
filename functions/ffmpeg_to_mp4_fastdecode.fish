@@ -12,7 +12,7 @@ function ffmpeg_to_mp4_fastdecode --description "Transcodes input files to editi
         set directory (dirname $f)
         set file (basename $f)
         set name (string split -m 1 -r '.' $file)[1]
-        ffmpeg -hide_banner -y -i $f -c:a copy -crf 15 -g 1 -tune fastdecode $directory/$name.edit.mp4
+        ffmpeg -hide_banner -y -i $f -c:a copy -crf 7 -g 1 -tune fastdecode $directory/$name.edit.mp4
         if [ $_flag_delete ]
             rm $f
         end
