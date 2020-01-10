@@ -1,6 +1,7 @@
-# Abbreviations
-if not set -q abbrs_initialized
-    set -U abbrs_initialized
+#!/usr/bin/env fish
+
+if not set -q is_abbreviations_initialized
+    set -U is_abbreviations_initialized
     echo -n Setting abbreviations...
 
     # search
@@ -108,8 +109,12 @@ if not set -q abbrs_initialized
 
     # gui apps
     abbr n 'nautilus .'
-    abbr e 'emacs .'
-    abbr ec 'emacsclient . -c &'
+
+    abbr e 'emacs'
+    abbr em 'emacs .'
+    abbr ed 'emacs --daemon'
+    abbr ec 'emacsclient -cn --alternate-editor $EDITOR'
+    abbr ec. 'emacsclient -cn --alternate-editor $EDITOR .'
 
     # cd to the last visited directory upon exiting ranger
     abbr r 'ranger --choosedir="/home/gdquest/.config/ranger/.rangerdir"; cd (cat /home/gdquest/.config/ranger/.rangerdir)'
