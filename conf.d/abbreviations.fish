@@ -110,11 +110,10 @@ if not set -q is_abbreviations_initialized
     # gui apps
     abbr n 'nautilus .'
 
-    abbr e 'emacs'
-    abbr em 'emacs .'
-    abbr ed 'emacs --daemon'
-    abbr ec 'emacsclient -cn --alternate-editor $EDITOR'
-    abbr ec. 'emacsclient -cn --alternate-editor $EDITOR .'
+    abbr e emacsclient -cn --alternate-editor \"\"
+    abbr ec emacsclient -cn --alternate-editor \"\"
+    abbr ec. emacsclient -cn --alternate-editor \"\" .
+    abbr ed emacs --daemon
 
     # cd to the last visited directory upon exiting ranger
     abbr r 'ranger --choosedir="/home/gdquest/.config/ranger/.rangerdir"; cd (cat /home/gdquest/.config/ranger/.rangerdir)'
