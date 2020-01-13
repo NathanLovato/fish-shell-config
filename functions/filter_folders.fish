@@ -1,8 +1,8 @@
 function filter_folders --description "Outputs a list of valid folders"
     set folders
-    for i in $argv
-        if test -d $i
-            set folders $folders $i
+    for arg in $argv
+        if test -d $arg
+            set folders $folders $arg
         end
     end
     echo $folders
