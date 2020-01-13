@@ -1,4 +1,6 @@
-function open_godot_project --description "Searches for Godot projects and opens the first project found."
+#!/usr/bin/env fish
+
+function open_godot_project --description 'Searches for Godot projects and opens the first project found.'
     argparse --name=open_godot_project 'p/path=' 'e/edge' 'r/run' 'h/help' -- $argv
     or return
 
@@ -19,14 +21,29 @@ function open_godot_project --description "Searches for Godot projects and opens
         return
     end
 
-    set first_project (find $_flag_path -iname project.godot -print -quit)
+    set project_file (find $_flag_path -iname project.godot -print -quit)
+    if not [ $project_file ]
+        set parent_directories (get_parent_directory -r -m 5)
+        for directory in $parent_directories
+            set found_file (find $directory -maxdepth 1 -iname project.godot -print -quit)
+            if test -f $found_file
+                set project_file $found_file
+                break
+            end
+        end
+    end
+    if not [ $project_file ]
+        echo "No project file found in sub-folders and parent directories."
+        return
+    end
+
     if [ $_flag_run ]
-        set first_project (dirname $first_project)
+        set project_file (dirname $project_file)
     end
 
     set executable godot
     if [ $_flag_edge ]
         set executable godot-edge
     end
-    $executable $first_project $argv
+    $executable $project_file $argv
 end
