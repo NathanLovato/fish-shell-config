@@ -10,7 +10,6 @@ function filter_files --description "Outputs a list of existing files, optionall
     set files
     for f in $argv
         if not test -f $f
-            echo "$f does not exist or is not a file"
             continue
         end
 
@@ -18,7 +17,6 @@ function filter_files --description "Outputs a list of existing files, optionall
         set extension (string split "." --right $name)[-1]
 
         if not contains $extension $extensions
-            # echo "$extension isn't a valid extension in $extensions"
             continue
         end
         set files $files $f
