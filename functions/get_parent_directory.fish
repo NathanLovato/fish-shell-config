@@ -1,6 +1,7 @@
 #!/usr/bin/env fish
 
-function get_parent_directories --description "Takes a dirpath or the current working directory and returns parent directory paths"
+# FIXME: known issue, error with a test call with -r and without -m
+function get_parent_directory --description "Takes a dirpath or the current working directory and returns parent directory paths"
     argparse --name=open_godot_project 'h/help' 'r/recursive' 'm/max=' -- $argv
     or return
 
@@ -11,7 +12,7 @@ function get_parent_directories --description "Takes a dirpath or the current wo
 
         Usage:
 
-        get_parent_directories [options] -- path
+        get_parent_directory [options] -- path
 
         Options:
 
@@ -20,7 +21,7 @@ function get_parent_directories --description "Takes a dirpath or the current wo
         directories to iterate over going up.
 
         Example:
-        \$ get_parent_directories -r -m 2 /home/me/Pictures/2019/trip-to-portugal
+        \$ get_parent_directory -r -m 2 /home/me/Pictures/2019/trip-to-portugal
         /home/name/Pictures/2019
         /home/name/Pictures
         '
