@@ -8,6 +8,7 @@ Look at the `functions/` directory for the full list. Fish loads them automatica
 
 - `abbreviations_erase_all`: Erase all abbreviations and optionally refresh them. Useful when editing abbreviations on the fly.
 - `accounting_file_expense`: Names and archives a file for my accountant.
+- `assets_move_to_directory`: Finds and moves image files in subdirectories to a given directory, replicating the folder structure.
 - `ffmpeg_compress_nvenc`: Compresses a video using the nvenc gpu encoder from NVidia, mostly for the web. Outputs an mp4 video.
 - `ffmpeg_remap_audio`: Replaces a video's audio track with another audio file.
 - `ffmpeg_to_mp4_fastdecode`: Transcodes video footage to an editing-friendly format, using a slight amount of compression. It's not as heavy as using a format like Prores, encodes faster, offers great performances in Blender's Video Sequence Editor, and it's good enough for YouTube videos.
