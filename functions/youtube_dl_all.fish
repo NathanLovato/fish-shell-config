@@ -1,29 +1,39 @@
-function youtube_dl_all --description 'Download all urls from a file passed as an argument'
-    set default_path $HOME'/.config/fish/functions/data/youtube_dl_url_list.txt'
-    set urls_file_path ''
-    if test -e (echo $argv)
-        set urls_file_path $argv
-    else
-        set urls_file_path $default_path
-    end
+#!/usr/bin/env fish
 
-    if not [ $urls_file_path ]
+function youtube_dl_all --description 'Download all urls from a file passed as an argument'
+    argparse --name=youtube_dl_all 'h/help' 'a/audio' 'f/format=' -- $argv
+    or return
+
+    set file_url_list $HOME/.config/fish/functions/data/youtube_dl_urls.txt
+    if not [ $file_url_list ]
         echo 'Missing source file to download from'
         return
     end
 
-    set youtube_urls
-    for i in (cat $default_path)
-        set youtube_urls $youtube_urls $i
-    end
-
-    set remaining_urls
-    for i in $youtube_urls
-        if not youtube-dl $i
-            set remaining_urls $remaining_urls $i
+    set temp (mktemp)
+    set urls (string split " " (cat $file_url_list))
+    for i in $urls
+        if [ $_flag_audio ]
+            youtube-dl -f 250 $i
+        else if [ $_flag_format ]
+            youtube-dl --format $_flag_f $i
+        else
+            youtube-dl $i
         end
+        # if not [ $status -eq 0 ]
+        #     echo "There was an error downloading this video: $i"
+        #     echo $i >> $temp
+        # end
+        echo $i > $temp
     end
 
-    echo $remaining_urls > $urls_file_path
-    echo "Some videos weren't downloaded:" $remaining_urls
+    set remaining_count (math (count $urls) - (count ($cat $temp)))
+    if [ $remaining_count -gt 0 ]
+        cat $temp > $file_url_list
+        echo "Some videos weren't downloaded:" (cat $file_url_list)
+    end
 end
+
+complete -c youtube_dl_all -s h -l help
+complete -c youtube_dl_all -s a -l audio
+complete -c youtube_dl_all -s f -l format
