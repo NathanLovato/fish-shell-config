@@ -1,7 +1,7 @@
 #!/usr/bin/env fish
 
-if not set -q is_abbreviations_initialized
-    set -U is_abbreviations_initialized
+if not [ $is_abbreviations_initialized ]
+    set -U is_abbreviations_initialized true
     echo -n Setting abbreviations...
 
     # search
@@ -125,9 +125,9 @@ if not set -q is_abbreviations_initialized
     abbr yta 'youtube-dl -x'
     abbr ytt 'youtube-dl --list-thumbnail'
 
-    abbr f 'firefox'
-    abbr fs 'firefox --search'
-    abbr fsy 'firefox https://www.youtube.com/results\?search_query='
+    abbr ff 'firefox'
+    abbr ffs 'firefox --search'
+    abbr ffsy 'firefox https://www.youtube.com/results\?search_query='
 
     # hugo
     abbr hnp 'hugo new post/2019/'
