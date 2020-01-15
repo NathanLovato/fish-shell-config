@@ -20,10 +20,6 @@ function youtube_dl_all --description 'Download all urls from a file passed as a
         else
             youtube-dl $i
         end
-        # if not [ $status -eq 0 ]
-        #     echo "There was an error downloading this video: $i"
-        #     echo $i >> $temp
-        # end
         echo $i > $temp
     end
 
