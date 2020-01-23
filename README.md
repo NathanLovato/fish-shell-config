@@ -9,6 +9,7 @@ Look at the `functions/` directory for the full list. Fish loads them automatica
 - `abbreviations_erase_all`: Erase all abbreviations and optionally refresh them. Useful when editing abbreviations on the fly.
 - `accounting_file_expense`: Names and archives a file for my accountant.
 - `assets_move_to_directory`: Finds and moves image files in subdirectories to a given directory, replicating the folder structure.
+- `bookmarks`: Print, jump to, or move files to bookmarked locations.
 - `count_days`: Count the days between two dates.
 - `ffmpeg_compress_nvenc`: Compresses a video using the nvenc gpu encoder from NVidia, mostly for the web. Outputs an mp4 video.
 - `ffmpeg_remap_audio`: Replaces a video's audio track with another audio file.
