@@ -8,6 +8,7 @@ Look at the `functions/` directory for the full list. Fish loads them automatica
 
 - `abbreviations_erase_all`: Erase all abbreviations and optionally refresh them. Useful when editing abbreviations on the fly.
 - `accounting_file_expense`: Names and archives a file for my accountant.
+- `accounting_auto_rename_documents`: Renames the documents passed as an input.
 - `assets_move_to_directory`: Finds and moves image files in subdirectories to a given directory, replicating the folder structure.
 - `bookmarks`: Print, jump to, or move files to bookmarked locations.
 - `count_days`: Count the days between two dates.

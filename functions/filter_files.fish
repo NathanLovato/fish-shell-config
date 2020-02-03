@@ -21,5 +21,9 @@ function filter_files --description "Outputs a list of existing files, optionall
         end
         set files $files $f
     end
-    echo $files
+
+    # Output
+    for f in $files
+        echo $f
+    end
 end
