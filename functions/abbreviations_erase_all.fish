@@ -1,12 +1,16 @@
+#!/usr/bin/env fish
+
 function abbreviations_erase_all --description "Erase all registered abbreviations"
     argparse --name=abbreviations_erase_all 'r/refresh' -- $argv
     or return
 
     set temp_file (mktemp)
-    abbr >> $temp_file
+    abbr >>$temp_file
     echo -n "Removed abbreviations: "
     for i in (cut -f 5 -d " " $temp_file)
-        if [ $i = \n ]; continue; end
+        if [ $i = \n ]
+            continue
+        end
         abbr --erase $i
         echo -n "$i "
     end
