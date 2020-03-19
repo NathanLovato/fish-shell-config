@@ -110,9 +110,9 @@ if not [ $is_abbreviations_initialized ]
     # gui apps
     abbr n 'nautilus .'
 
-    abbr e emacsclient -cn --alternate-editor \"\"
-    abbr ec emacsclient -cn --alternate-editor \"\"
-    abbr ec. emacsclient -cn --alternate-editor \"\" .
+    abbr e emacsclient -n --alternate-editor \"\"
+    abbr ec emacsclient -n --alternate-editor \"\"
+    abbr ec. emacsclient -n --alternate-editor \"\" .
     abbr ed emacs --daemon
 
     # cd to the last visited directory upon exiting ranger
