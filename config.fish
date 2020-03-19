@@ -3,3 +3,5 @@ set -gx VISUAL emacsclient -c -a ""
 set -gx ALTERNATE_EDITOR nvim
 
 source $HOME/.config/fish/conf.d/abbreviations.fish
+alias godot godot3.2
+
