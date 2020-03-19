@@ -7,15 +7,16 @@ My fish shell configuration and functions.
 Look at the `functions/` directory for the full list. Fish loads them automatically if they are in your fish config directory.
 
 - `abbreviations_erase_all`: Erase all abbreviations and optionally refresh them. Useful when editing abbreviations on the fly.
-- `accounting_file_expense`: Names and archives a file for my accountant.
 - `accounting_auto_rename_documents`: Renames the documents passed as an input.
+- `accounting_file_expense`: Names and archives a file for my accountant.
 - `assets_move_to_directory`: Finds and moves image files in subdirectories to a given directory, replicating the folder structure.
 - `bookmarks`: Print, jump to, or move files to bookmarked locations.
 - `count_days`: Count the days between two dates.
 - `ffmpeg_compress_nvenc`: Compresses a video using the nvenc gpu encoder from NVidia, mostly for the web. Outputs an mp4 video.
 - `ffmpeg_remap_audio`: Replaces a video's audio track with another audio file.
 - `ffmpeg_to_mp4_fastdecode`: Transcodes video footage to an editing-friendly format, using a slight amount of compression. It's not as heavy as using a format like Prores, encodes faster, offers great performances in Blender's Video Sequence Editor, and it's good enough for YouTube videos.
-- `image_website_resize_banner`: Resizes and compresses one or more images to use as a banner on the website, using imagemagick and pngquant.
+- `image_compress_and_overwrite`: Compress and overwrite png files with pngquant.
+- `image_website_resize_banner`: Resizes and compresses one or more images to use as a banner on the website, using `imagemagick` and `pngquant`.
 - `make_desktop_file`: Creates a shortcut .desktop file for the gnome desktop.
 - `open_godot_project`: Searches for Godot projects and opens the first project found.
 - `video_create_blender_projects`: Create one or more video editing projects with Blender.
