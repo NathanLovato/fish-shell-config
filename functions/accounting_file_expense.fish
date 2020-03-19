@@ -1,12 +1,64 @@
+#!/usr/bin/env fish
+
+# Setting variables to defaults if they aren't set
+if not set --query COMPANY_EXPENSES_DIRNAME_PROFESSIONAL
+    set COMPANY_EXPENSES_DIRNAME_PROFESSIONAL professional
+end
+if not set --query COMPANY_EXPENSES_DIRNAME_PERSONAL
+    set COMPANY_EXPENSES_DIRNAME_PERSONAL personal
+end
+if not set --query COMPANY_EXPENSES_DIRNAME_SHARED
+    set COMPANY_EXPENSES_DIRNAME_SHARED shared
+end
+
 function accounting_file_expense --description "Move a file to the right expense folder and dates the file"
-    set root_directory "/home/gdquest/Dropbox/Files/"(date +%Y)"/company/2.frais"
-    argparse --name=accounting_file_expense --min-args 1 'd/date=' 't/type=' -- $argv
+    argparse --name=accounting_file_expense --min-args 0 h/help 'd/date=' 't/type=' -- $argv
     or return
+
+    if [ $_flag_help ]
+        echo -e "
+        Archives a file to a given company expense folder and prepends a date, for accounting
+        purposes. The program archives files in monthly directories in your accounting folder.
+
+        "$format_bold"Usage"$format_normal":
+        accounting_file_expense [OPTIONS] file_1 [file_2, ...]
+
+        "$format_bold"Flags"$format_normal":
+        -h/--help     -- Display this help message.
+        -d/--date -- Specify the date of the expense, if not today. The format is the same as for
+         the GNU date program: yesterday, last\ week, 2020-01-23, 200123, etc. are all valid dates.
+        -t/--type     -- The type of the expense, either pro, personal, or shared. They will
+
+        "$format_bold"Configuration"$format_normal":
+        To make this work for everyone, this program requires you to set a few variables. You can do
+        so in your fish config, or in the shell directly, using "$format_italic"set -Ux VARIABLE_NAME value"$format_normal"
+
+        "$format_bold"COMPANY_EXPENSES_PATH"$format_normal": the absolute path to your company's expenses accounting archive
+        directory.
+        "$format_bold"COMPANY_EXPENSES_DIRNAME_PROFESSIONAL"$format_normal": the name of your professional expenses directory.
+        Default: \"professional\"
+        "$format_bold"COMPANY_EXPENSES_DIRNAME_PERSONAL"$format_normal": the name of your personal expenses directory. Default:
+        \"personal\"
+        "$format_bold"COMPANY_EXPENSES_DIRNAME_SHARED"$format_normal": the name of your shared expenses directory. Default:
+        \"shared\"
+        "
+        return
+    end
+
+    if not set --query COMPANY_EXPENSES_PATH
+        echo "You must set the variable COMPANY_EXPENSES_PATH for this program to work. For more information, run accounting_file_expense --help"
+        return
+    end
 
     set extensions "pdf jpg jpeg png"
     set file_list (filter_files $argv --extensions $extensions)
     if not [ $file_list ]
-        echo "None of the file paths exists, canceling"
+        echo "None of the file paths are valid:
+
+        $argv
+
+        Supported file types: $extensions.
+        Canceling the operation."
         return
     end
 
@@ -16,12 +68,13 @@ function accounting_file_expense --description "Move a file to the right expense
     end
     set month (echo $date | cut -d "-" -f 2)
 
-    if [ $_flag_type = "shared" ]
-        set directory $root_directory/3.partagés
-    else if [ $_flag_type = "personal" ]
-        set directory $root_directory/2.personnels
-    else
-        set directory $root_directory/1.pros
+    switch $_flag_type
+        case shared
+            set directory $COMPANY_EXPENSES_PATH/$COMPANY_EXPENSES_DIRNAME_SHARED
+        case personal
+            set directory $COMPANY_EXPENSES_PATH/$COMPANY_EXPENSES_DIRNAME_PERSONAL
+        case '*'
+            set directory $COMPANY_EXPENSES_PATH/$COMPANY_EXPENSES_DIRNAME_PROFESSIONAL
     end
 
     set target_folder {$directory}/{$month}
@@ -31,16 +84,8 @@ function accounting_file_expense --description "Move a file to the right expense
 
     set extensions_list (string split " " $extensions)
     for f in $file_list
-        set name (basename $f)
-        set extension (string split "." --right $name)[-1]
-
-        if not contains $extension $extensions_list
-            echo The extension of $f, $extension, is not in $extensions_list
-            continue
-        end
-
         set path {$target_folder}/{$date}-(basename $f)
-        mv $f $path && echo "moved" $f "to" $path
+        mv -v $f $path
     end
 end
 
