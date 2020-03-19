@@ -3,6 +3,8 @@ set -gx VISUAL emacsclient -c -a ""
 set -gx ALTERNATE_EDITOR nvim
 
 source $HOME/.config/fish/conf.d/abbreviations.fish
+source $HOME/.config/fish/conf.d/settings.fish
+
 alias godot godot3.2
 
 if not set --query ARE_FORMAT_VARS_INITIALIZED
