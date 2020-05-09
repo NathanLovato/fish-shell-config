@@ -1,55 +1,53 @@
 function video_create_blender_projects --description 'Create one or more video editing projects with Blender'
-    argparse --name=video_create_blender_projects --min-args 1 'h/help' -- $argv
+    argparse --name=video_create_blender_projects h/help o/open p/render-proxies -- $argv
     or return
 
-    if [ $_flag_help ]
-        echo "Create one or more video editing projects with Blender.
-        Usage:
-        video_create_blender_projects [directory_1] [directory_2] ...
-        For each input directory, moves all the footage files it contains into subdirectories, copies the template blend file to the directory, and renames it."
-        return
-    end
-
-    set ERROR_MISSING_FOLDERS "You need to pass folder(s) to this function for it to work."
+    test $_flag_help && echo_help && return
+    not test $argv && echo "You need to pass folder(s) to this function for it to work." && return
 
     set EXT_VIDEO mp4,flv,mov,mts,mkv,MP4,FLV,MOV,MTS,MKV
     set EXT_IMG png,jpg,gif
     set EXT_AUDIO wav,mp3,aac,flac
 
-    set blender_template_file $HOME/Templates/video.blend
-    set blender_python_file $HOME/.config/fish/functions/video_create_blender_projects.py
+    set BLENDER_TEMPLATE_FILE $HOME/Templates/video.blend
+    set BLENDER_ASSETS $HOME/Videos/assets/assets
 
-    echo "Creating directories and moving files."
     for dir in $argv
-        if not test -d $dir
-            echo "Directory $dir does not exist, creating it."
-            mkdir $dir
-        end
+        set project_name (dirname $dir)
+        test $project_name = "." && set project_name (basename (pwd))
+        set blend_file_path $dir/$project_name.blend
+
+        cp -v $BLENDER_TEMPLATE_FILE $blend_file_path
+
+        mkdir -p $dir/footage/video $dir/footage/audio $dir/footage/img
+
+        set files_video $dir/*.{(echo $EXT_VIDEO)}
+        set files_img $dir/*.{(echo $EXT_IMG)}
+        set files_audio $dir/*.{(echo $EXT_AUDIO)}
+        count $files_video && mv -v $files_video $dir/footage/video
+        count $files_img && mv -v $files_img $dir/footage/img
+        count $files_audio && mv -v $files_audio $dir/footage/audio
+
+        # Generate proxies
+        test $_flag_p && bpsproxy -p nvenc -s 25 -- $dir
+        cp --recursive $BLENDER_ASSETS $dir
+
+        test $_flag_open && blender $blend_file_path &
     end
 
-    set start_folder (pwd)
-    for dir in $argv
-        cd $dir
+end
 
-        set blend_file_path $dir.blend
-        echo "Creating blend file" $blend_file_path
-        cp $blender_template_file $blend_file_path
+function echo_help
+    echo "Create one or more video editing projects with Blender.
+    For each input directory, moves all the footage files it contains into subdirectories, copies
+    the template blend file to the directory, and renames it.
 
-        mkdir video audio img
-        for file in *.{(echo $EXT_VIDEO)}
-            mv $file video/$file
-        end
-        for file in *.{(echo $EXT_IMG)}
-            mv $file img/$file
-        end
-        for file in *.{(echo $EXT_AUDIO)}
-            mv $file audio/$file
-        end
+    Usage:
+    video_create_blender_projects [OPTIONS] -- directory_1 directory_2 ...
 
-        if test -f $blender_python_file
-            blender $blend_file_path -b -P $blender_python_file
-        end
-
-        cd $start_folder
-    end
+    Options:
+    -h/--help            -- Show this help information.
+    -o/--open            -- Open the projects in blender.
+    -p/--render-proxies  -- Render proxies with bpsproxy.
+    "
 end
