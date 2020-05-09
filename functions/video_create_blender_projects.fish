@@ -14,7 +14,7 @@ function video_create_blender_projects --description 'Create one or more video e
 
     for arg in $argv
         set dir (realpath $arg)
-        set project_name (basename (dirname $dir))
+        set project_name (basename $dir)
         test $project_name = "." && set project_name (basename (pwd))
         set blend_file_path $dir/$project_name.blend
 
@@ -25,9 +25,9 @@ function video_create_blender_projects --description 'Create one or more video e
         set files_video $dir/*.{(echo $EXT_VIDEO)}
         set files_img $dir/*.{(echo $EXT_IMG)}
         set files_audio $dir/*.{(echo $EXT_AUDIO)}
-        count $files_video && mv -v $files_video $dir/footage/video
-        count $files_img && mv -v $files_img $dir/footage/img
-        count $files_audio && mv -v $files_audio $dir/footage/audio
+        count $files_video >/dev/null && mv -v $files_video $dir/footage/video
+        count $files_img >/dev/null && mv -v $files_img $dir/footage/img
+        count $files_audio >/dev/null && mv -v $files_audio $dir/footage/audio
 
         # Generate proxies
         test $_flag_p && bpsproxy -p nvenc -s 25 -- $dir
