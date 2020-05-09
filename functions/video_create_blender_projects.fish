@@ -14,9 +14,13 @@ function video_create_blender_projects --description 'Create one or more video e
 
     for arg in $argv
         set dir (realpath $arg)
+        set existing_file (find $dir -maxdepth 1 -type f -iname '*.blend')
+        count $existing_file >/dev/null && echo "Found existing blender file '"(basename $existing_file)"' in '$arg': skipping directory." && continue
+
         set project_name (basename $dir)
         test $project_name = "." && set project_name (basename (pwd))
         set blend_file_path $dir/$project_name.blend
+
 
         cp -v $BLENDER_TEMPLATE_FILE $blend_file_path
 
