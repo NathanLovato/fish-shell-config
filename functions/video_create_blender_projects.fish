@@ -56,3 +56,7 @@ function echo_help
     -p/--render-proxies  -- Render proxies with bpsproxy.
     "
 end
+
+complete -c video_create_blender_projects -s h -l help -d "Print usage information"
+complete -c video_create_blender_projects -s o -l open -d "Open each newly created project in Blender"
+complete -c video_create_blender_projects -s p -l render-proxies -d "Render proxies for each project with bpsproxy"
