@@ -12,8 +12,9 @@ function video_create_blender_projects --description 'Create one or more video e
     set BLENDER_TEMPLATE_FILE $HOME/Templates/video.blend
     set BLENDER_ASSETS $HOME/Videos/assets/assets
 
-    for dir in $argv
-        set project_name (dirname $dir)
+    for arg in $argv
+        set dir (realpath $arg)
+        set project_name (basename (dirname $dir))
         test $project_name = "." && set project_name (basename (pwd))
         set blend_file_path $dir/$project_name.blend
 
