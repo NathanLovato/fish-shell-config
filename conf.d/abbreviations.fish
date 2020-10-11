@@ -6,8 +6,8 @@ if not [ $is_abbreviations_initialized ]
 
     # search
     abbr fi 'find . -iname'
-    abbr g 'grep'
-    abbr l 'locate'
+    abbr g grep
+    abbr l locate
     abbr lsd 'find * -maxdepth 0 -type d'
     abbr fsd 'find * -maxdepth 0 -type d'
 
@@ -48,7 +48,6 @@ if not [ $is_abbreviations_initialized ]
     abbr gcp 'git cherry-pick'
 
     abbr gd 'git diff'
-    abbr gd 'git diff'
 
     abbr gf 'git fetch'
     abbr gl 'git log'
@@ -78,21 +77,26 @@ if not [ $is_abbreviations_initialized ]
     abbr gs 'git status'
     abbr gst 'git stash'
 
-    # hub
-    abbr hb 'hub browse'
-    abbr hbi 'hub browse -- issues'
-    abbr hco 'hub checkout'
-    abbr hi 'hub issue'
-    abbr hic 'hub issue create -m'
-    abbr hcl 'hub clone'
-    abbr hcr 'hub create'
-    abbr hpr 'hub pull-request'
-    abbr hrl 'hub release'
+    # github-cli
+    abbr ghpl 'gh pr list'
+    abbr ghpc 'gh pr create'
+    abbr ghpco 'gh pr checkout'
+    abbr ghpch 'gh pr checks'
+    abbr ghpd 'gh pr diff'
+    abbr ghpm 'gh pr merge'
+    abbr ghpr 'gh pr review'
+
+    abbr ghil 'gh issue list'
+    abbr ghiv 'gh issue view'
+    abbr ghic 'gh issue create'
+    abbr ghicl 'gh issue close'
+    abbr ghiln 'gh issue list -a NathanLovato'
+    abbr ghila 'gh issue list -a NathanLovato'
 
     # Python
-    abbr p2 'python2'
-    abbr p3 'python3'
-    abbr p 'python3'
+    abbr p2 python2
+    abbr p3 python3
+    abbr p python3
 
     abbr pi 'pip install'
     abbr piu 'pip install --upgrade'
@@ -119,28 +123,30 @@ if not [ $is_abbreviations_initialized ]
     abbr r 'ranger --choosedir="/home/gdquest/.config/ranger/.rangerdir"; cd (cat /home/gdquest/.config/ranger/.rangerdir)'
 
     # cli programs
-    abbr pq 'pngquant'
+    abbr pq pngquant
 
-    abbr yt 'youtube-dl'
-    abbr yta 'youtube-dl -x'
+    abbr yt youtube-dl
+    abbr yt22 'youtube-dl --format 22'
+    abbr yta 'youtube-dl --extract-audio'
     abbr ytt 'youtube-dl --list-thumbnail'
 
-    abbr ff 'firefox'
+    abbr ff firefox
     abbr ffs 'firefox --search'
     abbr ffsy 'firefox https://www.youtube.com/results\?search_query='
 
     # hugo
-    abbr hnp 'hugo new post/2019/'
     abbr hn 'hugo new'
     abbr hs 'hugo server -D'
-    abbr h 'hugo'
+    abbr h hugo
 
     # power sequencer
-    abbr br 'bpsrender -w 6 *.blend && ffmpeg_compress_nvenc --delete *.mp4 && mv *.mp4 ~/Videos/youtube-exports/ && rm -rf bpsrender/'
-    abbr brs 'bpsrender -w 6 -d *.blend && bpsrender *.blend -j'
-    abbr brm 'bpsrender -m *.blend'
+    abbr br 'bpsrender *.blend'
+    abbr bpsr 'bpsrender *.blend'
     abbr bp 'bpsproxy .'
+    abbr bpsp 'bpsproxy .'
     abbr bpnv 'bpsproxy . -p nvenc'
+
+    abbr ogp open_godot_project
 
     abbr ffmpeg_remap_audio "ffmpeg -i video -i audio -map 0:v:0 -map 1:a:0 -c:v copy -c:a aac -b:a 320k introducing-docs.mp4"
 
@@ -150,7 +156,7 @@ if not [ $is_abbreviations_initialized ]
     abbr nwon "nmcli radio wifi off"
 
     # gnome
-    abbr gsq "gnome-session-quit"
+    abbr gsq gnome-session-quit
 
-    echo 'Done'
+    echo Done
 end
