@@ -1,5 +1,5 @@
-set -gx EDITOR emacsclient -t -a ""
-set -gx VISUAL emacsclient -c -a ""
+set -gx EDITOR emacsclient
+set -gx VISUAL emacsclient
 set -gx ALTERNATE_EDITOR nvim
 
 source $HOME/.config/fish/conf.d/abbreviations.fish
