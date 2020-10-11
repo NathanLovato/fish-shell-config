@@ -41,5 +41,3 @@ function open_godot_project --description 'Searches for Godot projects and opens
 
     $executable $flag_editor -u $project_file $argv
 end
-
-complete -f -c open_godot_project -s e -l executable -a (string join " " (find /usr/local/bin/ -iname 'godot?.?'))
