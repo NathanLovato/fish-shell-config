@@ -1,6 +1,6 @@
-set -gx EDITOR emacsclient
+set -gx EDITOR kak
 set -gx VISUAL emacsclient
-set -gx ALTERNATE_EDITOR nvim
+set -gx ALTERNATE_EDITOR vi
 
 source $HOME/.config/fish/conf.d/abbreviations.fish
 source $HOME/.config/fish/conf.d/settings.fish
@@ -26,3 +26,5 @@ if not set --query ARE_FORMAT_VARS_INITIALIZED
 
     set -Ux format_blink (tput blink)
 end
+
+starship init fish | source
