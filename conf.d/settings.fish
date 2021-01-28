@@ -9,3 +9,6 @@ if not [ $COMPANY_VARS_LAST_SET_YEAR = $YEAR ]
     set -Ux COMPANY_EXPENSES_DIRNAME_PERSONAL "2.personnels"
     set -Ux COMPANY_EXPENSES_DIRNAME_SHARED "3.partagés"
 end
+
+alias focus "nmcli networking off"
+alias losefocus "nmcli networking on"
